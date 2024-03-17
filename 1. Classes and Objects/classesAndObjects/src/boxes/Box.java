@@ -1,4 +1,4 @@
-package exersices;
+package boxes;
 
 import java.math.BigDecimal;
 
