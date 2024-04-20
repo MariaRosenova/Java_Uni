@@ -1,4 +1,4 @@
-package documentStorage;
+package src.documentStorage;
 
 public class Document {
     private float sizeFile;

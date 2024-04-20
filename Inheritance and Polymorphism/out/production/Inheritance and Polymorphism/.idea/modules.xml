@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Inheritance and Polymorphism.iml" filepath="$PROJECT_DIR$/.idea/Inheritance and Polymorphism.iml" />
+      <module fileurl="file://$PROJECT_DIR$/InheritancePolimorphism/InheritancePolimorphism.iml" filepath="$PROJECT_DIR$/InheritancePolimorphism/InheritancePolimorphism.iml" />
+    </modules>
+  </component>
+</project>

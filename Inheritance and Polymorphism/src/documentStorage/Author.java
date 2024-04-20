@@ -1,4 +1,4 @@
-package documentStorage;
+package src.documentStorage;
 
 public class Author {
     private String title;

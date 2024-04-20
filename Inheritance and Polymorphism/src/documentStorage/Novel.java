@@ -1,4 +1,4 @@
-package documentStorage;
+package src.documentStorage;
 
 public class Novel extends Document {
     private String resume;

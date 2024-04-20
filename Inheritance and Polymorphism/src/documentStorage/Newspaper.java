@@ -1,4 +1,4 @@
-package documentStorage;
+package src.documentStorage;
 
 public class Newspaper extends Document {
     private int periodicity;
