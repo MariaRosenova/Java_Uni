@@ -4,8 +4,11 @@ public class Book extends Document {
     private Author author;
     private String ISBN;
 
-    public Book (float fileSize, String format, String title, Author author, String ISBN) {
-        super(fileSize, format, title);
+    public Book() {
+
+    }
+    public Book (double fileSize, String format, String title, Author author, String ISBN) {
+        super(author, fileSize, format, title, ISBN);
         this.author = author;
         this.ISBN = ISBN;
     }

@@ -1,29 +1,21 @@
 package src.documentStorage;
 
 public class Novel extends Document {
-    private String resume;
-    private Author author;
+    private String novelAbstract;
 
-
-    public Novel(Author author, String resume, float sizeFile, String format, String title) {
-        super(sizeFile, format, title);
-        this.author = author;
-        this.resume = resume;
+    public Novel(Author author, String novelAbstract, double sizeFile, String format, String title, String ISBN) {
+        super(author, sizeFile, format, title, ISBN);
+        this.novelAbstract = novelAbstract;
     }
 
-    public String getResume() {
-        return resume;
-    }
-
-    public Author getAuthor() {
-        return author;
+    public String getNovelAbstract() {
+        return novelAbstract;
     }
 
     @Override
     public String toString() {
         return "Novel{" +
-                "resume='" + resume + '\'' +
-                ", author=" + author +
+                "novelAbstract='" + novelAbstract + '\'' +
                 '}';
     }
 }

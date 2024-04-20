@@ -5,7 +5,7 @@ public class DocumentStorage {
     private int countOfStorageDocuments;
     private float currentVolumeOfData;
 
-    public DocumentStorage(float maxVolumeOfData, int countOfStorageDocuments, float currentVolumeOfData) {
+    public DocumentStorage(double maxVolumeOfData, int countOfStorageDocuments, float currentVolumeOfData) {
         this.maxVolumeOfData = maxVolumeOfData;
         this.countOfStorageDocuments = countOfStorageDocuments;
         this.currentVolumeOfData = currentVolumeOfData;

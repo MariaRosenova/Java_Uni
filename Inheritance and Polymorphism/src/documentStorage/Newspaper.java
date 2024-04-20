@@ -4,8 +4,8 @@ public class Newspaper extends Document {
     private int periodicity;
     private int countOfArticles;
     //float sizeFile, String format, String title
-   public Newspaper(float sizeFile, String format, String title, int periodicity, int countOfArticles) {
-       super(sizeFile, format, title);
+   public Newspaper(Author author, double sizeFile, String novelAbstract, String format, String title, int periodicity, int countOfArticles, String ISBN) {
+       super(author, novelAbstract, sizeFile, format, title, ISBN);
        this.periodicity = periodicity;
        this.countOfArticles = countOfArticles;
    }
