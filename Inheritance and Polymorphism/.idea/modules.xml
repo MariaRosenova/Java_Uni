@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Inheritance and Polymorphism.iml" filepath="$PROJECT_DIR$/.idea/Inheritance and Polymorphism.iml" />
+      <module fileurl="file://$PROJECT_DIR$/InheritancePolimorphism/InheritancePolimorphism.iml" filepath="$PROJECT_DIR$/InheritancePolimorphism/InheritancePolimorphism.iml" />
     </modules>
   </component>
 </project>

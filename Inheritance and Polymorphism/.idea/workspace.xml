@@ -1,32 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="679ada34-0760-44e4-8a3d-0673150bccd2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/1. Classes and Objects.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/classesAndObjects/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/classesAndObjects/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/classesAndObjects/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/classesAndObjects/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/classesAndObjects/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/classesAndObjects/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/classesAndObjects/secondWeek.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/classesAndObjects/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/classesAndObjects/src/boxes/Box.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/classesAndObjects/src/video/Author.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/classesAndObjects/src/video/Video.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/out/production/1. Classes and Objects/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/out/production/1. Classes and Objects/boxes/Box.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/out/production/1. Classes and Objects/video/Author.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../1. Classes and Objects/out/production/1. Classes and Objects/video/Video.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package-info" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -41,14 +34,39 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.root.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-21&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.4361335&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mimit\Documents\NBU\JAVA\Java_Uni\Inheritance and Polymorphism" />
+      <recent name="C:\Users\mimit\Documents\NBU\JAVA\Java_Uni\Inheritance and Polymorphism\InheritancePolimorphism\src" />
+      <recent name="C:\Users\mimit\Documents\NBU\JAVA\Java_Uni\Inheritance and Polymorphism\src" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -60,6 +78,9 @@
       <workItem from="1713288973160" duration="634000" />
       <workItem from="1713334839844" duration="38000" />
       <workItem from="1713334913846" duration="969000" />
+      <workItem from="1713437266073" duration="2105000" />
+      <workItem from="1713594288182" duration="12597000" />
+      <workItem from="1715591614193" duration="7000" />
     </task>
     <servers />
   </component>
