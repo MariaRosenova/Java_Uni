@@ -1,6 +1,6 @@
 package org.project;
 
-import java.io.Serializable;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class Receipt implements Serializable {
     private List<Product> products;
     private double totalAmount;
 
-    public Receipt(int receiptNumber, Cashier cashier) {
+    public Receipt(int receiptNumber, Cashier cashier, List<Product> products, double totalAmount) {
         this.receiptNumber = receiptNumber;
         this.cashier = cashier;
         this.dateTime = LocalDateTime.now();
@@ -33,6 +33,7 @@ public class Receipt implements Serializable {
         products.add(product);
     }
 
+
     public void calculateTotal() {
         totalAmount = products.stream().mapToDouble(p -> p.calculateSellingPrice(20, 5, 10)).sum(); // Example percentages
     }
@@ -47,7 +48,24 @@ public class Receipt implements Serializable {
         System.out.println("Total: " + totalAmount);
     }
 
-    public void saveToFile() {
+    //LOOK in details
+    public void saveToFile() throws IOException {
         // Serialization code here
+        String fileName = "receipt_" + receiptNumber + ".txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            writer.write("Receipt #" + receiptNumber + "\n");
+            writer.write("Cashier: " + cashier.getName() + "\n");
+            writer.write("Date: " + dateTime + "\n");
+            for (Product product : products) {
+                writer.write(product.getName() + " - " + product.getPurchasePrice() + " x " + product.getQuantity() + "\n");
+            }
+            writer.write("Total: " + totalAmount + "\n");
+        }
+    }
+
+    public static Receipt readFromFile(String fileName) throws IOException, ClassNotFoundException {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
+            return (Receipt) in.readObject();
+        }
     }
 }
