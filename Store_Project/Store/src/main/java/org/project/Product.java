@@ -3,26 +3,29 @@ package org.project;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Product implements  Serializable{
+public class Product implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private int id;
     private String name;
-    private double purchasePrice;
+    private double unitDeliveryPrice;
     private String category;
     private LocalDate expirationDate;
     private int quantity;
 
-    public Product(int id, String name, double purchasePrice, String category, LocalDate expirationDate, int quantity) {
+    // Constructor
+    public Product(int id, String name, double unitDeliveryPrice, String category, LocalDate expirationDate, int quantity) {
         this.id = id;
         this.name = name;
-        this.purchasePrice = purchasePrice;
+        this.unitDeliveryPrice = unitDeliveryPrice;
         this.category = category;
         this.expirationDate = expirationDate;
         this.quantity = quantity;
     }
 
+    // Method to calculate selling price
     public double calculateSellingPrice(int markupPercentage, int daysBeforeExpiration, int discountPercentage) {
-        double markupAmount = purchasePrice * markupPercentage / 100;
-        double sellingPrice = purchasePrice + markupAmount;
+        double sellingPrice = unitDeliveryPrice + (unitDeliveryPrice * markupPercentage / 100);
 
         LocalDate expirationPlusDays = LocalDate.now().plusDays(daysBeforeExpiration);
         if (expirationPlusDays.isAfter(expirationDate)) {
@@ -41,8 +44,8 @@ public class Product implements  Serializable{
         return name;
     }
 
-    public double getPurchasePrice() {
-        return purchasePrice;
+    public double getUnitDeliveryPrice() {
+        return unitDeliveryPrice;
     }
 
     public String getCategory() {
@@ -65,8 +68,8 @@ public class Product implements  Serializable{
         this.name = name;
     }
 
-    public void setPurchasePrice(double purchasePrice) {
-        this.purchasePrice = purchasePrice;
+    public void setUnitDeliveryPrice(double unitDeliveryPrice) {
+        this.unitDeliveryPrice = unitDeliveryPrice;
     }
 
     public void setCategory(String category) {

@@ -62,18 +62,5 @@ public class Store {
         this.totalExpenses -= cashier.getSalary();
     }
 
-    public Receipt processPurchase(List<Product> products, Cashier cashier) {
-        double purchaseTotal = 0.0;
-        for (Product product : products) {
-            if (this.inventory.contains(product)) {
-                purchaseTotal += product.getPurchasePrice();
-                this.inventory.remove(product);
-            }
-        }
-        //cashier, products, purchaseTotal
-        Receipt receipt = new Receipt(nextReceiptNumber++, cashier, products, purchaseTotal);
-        this.receipts.add((receipt));
 
-        return receipt;
-    }
 }

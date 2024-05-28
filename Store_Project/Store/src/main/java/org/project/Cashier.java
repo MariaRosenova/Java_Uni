@@ -9,8 +9,8 @@ public class Cashier implements Serializable {
     private int registerId;
 
     public Cashier(int id, String name, double salary) {
-        this.id = id;
         this.name = name;
+        this.id = id;
         this.salary = salary;
     }
 
@@ -44,5 +44,19 @@ public class Cashier implements Serializable {
 
     public void setRegisterId(int registerId) {
         this.registerId = registerId;
+    }
+
+    public void processOrder(double priceOfOrder, double customerMoney) {
+        if (priceOfOrder > customerMoney) {
+            double shortfall = priceOfOrder - customerMoney;
+            System.out.println("The money is not enough, you have to pay $" + shortfall + "more.");
+        } else {
+            double remainder = customerMoney - priceOfOrder;
+            String message = remainder > 0
+                    ? "The order is successful! You have $" + remainder + " in change."
+                    : "The order is successful!";
+            System.out.println(message);
+        }
+
     }
 }

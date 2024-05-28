@@ -20,7 +20,7 @@ public class Receipt implements Serializable {
         this.products = new ArrayList<>();
     }
 
-    public void addProduct(Product product, int quantity) throws InsufficientQuantityException, ExpiredProductException {
+    public void addProduct(Product product, int quantity, double price) throws InsufficientQuantityException, ExpiredProductException {
         if (product.getQuantity() < quantity) {
             throw new InsufficientQuantityException(product, quantity, product.getQuantity());
         }
@@ -57,7 +57,7 @@ public class Receipt implements Serializable {
             writer.write("Cashier: " + cashier.getName() + "\n");
             writer.write("Date: " + dateTime + "\n");
             for (Product product : products) {
-                writer.write(product.getName() + " - " + product.getPurchasePrice() + " x " + product.getQuantity() + "\n");
+                writer.write(product.getName() + " - " + product.getUnitDeliveryPrice() + " x " + product.getQuantity() + "\n");
             }
             writer.write("Total: " + totalAmount + "\n");
         }
