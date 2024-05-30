@@ -13,6 +13,26 @@ public class Receipt implements Serializable {
     private List<Product> products;
     private double totalAmount;
 
+    public int getReceiptNumber() {
+        return receiptNumber;
+    }
+
+    public Cashier getCashier() {
+        return cashier;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public double getTotalAmount() {
+        return totalAmount;
+    }
+
     public Receipt(int receiptNumber, Cashier cashier, List<Product> products, double totalAmount) {
         this.receiptNumber = receiptNumber;
         this.cashier = cashier;
