@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Receipt implements Serializable {
-    private int receiptNumber;
+    private static int receiptNumber = 0;
     private Cashier cashier;
     private LocalDateTime dateTime;
     private List<Product> products;
@@ -53,6 +53,9 @@ public class Receipt implements Serializable {
         products.add(product);
     }
 
+//    public static int getNextReceiptNumber() {
+//        return ++receiptNumber;
+//    }
 
     public void calculateTotal() {
         totalAmount = products.stream().mapToDouble(p -> p.calculateSellingPrice(20, 5, 10)).sum(); // Example percentages

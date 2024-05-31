@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Store {
     private static int nextReceiptNumber = 1;
-    private List<Cashier> cashiers;
+    private List<Cashier> cashiers; //map
     private List<Product> inventory;
-    private List<Receipt> receipts;
+    private List<Receipt> receipts; //map
     private double totalRevenue;
     private double totalExpenses;
 
@@ -18,6 +18,7 @@ public class Store {
         this.totalRevenue = 0.0;
         this.totalExpenses = 0.0;
     }
+        //add methods for totalRevenue, totalExpenses, profit
 
     public List<Cashier> getCashiers() {
         return cashiers;
