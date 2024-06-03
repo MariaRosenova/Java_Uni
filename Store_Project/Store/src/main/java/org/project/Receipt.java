@@ -7,11 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Receipt implements Serializable {
-    private static int receiptNumber = 0;
+    private int receiptNumber = 0;
     private Cashier cashier;
     private LocalDateTime dateTime;
     private List<Product> products;
     private double totalAmount;
+
+    public Receipt(int receiptNumber, Cashier cashier, List<Product> products, double totalAmount) {
+        this.receiptNumber = receiptNumber;
+        this.cashier = cashier;
+        this.dateTime = LocalDateTime.now();
+        this.products = new ArrayList<>();
+    }
+
 
     public int getReceiptNumber() {
         return receiptNumber;
@@ -31,13 +39,6 @@ public class Receipt implements Serializable {
 
     public double getTotalAmount() {
         return totalAmount;
-    }
-
-    public Receipt(int receiptNumber, Cashier cashier, List<Product> products, double totalAmount) {
-        this.receiptNumber = receiptNumber;
-        this.cashier = cashier;
-        this.dateTime = LocalDateTime.now();
-        this.products = new ArrayList<>();
     }
 
     public void addProduct(Product product, int quantity, double price) throws InsufficientQuantityException, ExpiredProductException {
