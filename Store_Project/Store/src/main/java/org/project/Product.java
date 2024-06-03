@@ -13,8 +13,21 @@ public class Product implements Serializable {
     private int quantity;
     private SellingPriceCalculator sellingPriceCalculator;
 
-    // Constructor
+    public enum Category {
+        FOOD,
+        NON_FOOD
+    }
     public Product(int id, String name, double unitDeliveryPrice, String category, LocalDate expirationDate, int quantity, SellingPriceCalculator sellingPriceCalculator) {
+
+        if (id < 0) throw new IllegalArgumentException("ID cannot be negative");
+        if (name == null || name.isEmpty()) throw new IllegalArgumentException("Name cannot be null or empty");
+        if (unitDeliveryPrice < 0) throw new IllegalArgumentException("Unit delivery price cannot be negative");
+        if (category == null) throw new IllegalArgumentException("Category cannot be null");
+        if (expirationDate == null) throw new IllegalArgumentException("Expiration date cannot be null");
+        if (quantity < 0) throw new IllegalArgumentException("Quantity cannot be negative");
+        if (sellingPriceCalculator == null) throw new IllegalArgumentException("Selling price calculator cannot be null");
+
+
         this.id = id;
         this.name = name;
         this.unitDeliveryPrice = unitDeliveryPrice;
@@ -24,8 +37,6 @@ public class Product implements Serializable {
         this.sellingPriceCalculator = sellingPriceCalculator;
     }
 
-    // Method to calculate selling price
-    //ADD checking for food or non-food
     public double calculateSellingPrice(int markupPercentage, int daysBeforeExpiration, int discountPercentage) {
         return sellingPriceCalculator.calculateSellingPrice(unitDeliveryPrice, markupPercentage, discountPercentage, daysBeforeExpiration, expirationDate);
     }
@@ -59,22 +70,40 @@ public class Product implements Serializable {
     }
 
     public void setName(String name) {
+        if (name == null || name.isEmpty()) throw new IllegalArgumentException("Name cannot be null or empty");
         this.name = name;
     }
 
     public void setUnitDeliveryPrice(double unitDeliveryPrice) {
+        if (unitDeliveryPrice < 0) throw new IllegalArgumentException("Unit delivery price cannot be negative");
         this.unitDeliveryPrice = unitDeliveryPrice;
     }
 
     public void setCategory(String category) {
+        if (category == null) throw new IllegalArgumentException("Category cannot be null");
         this.category = category;
     }
 
     public void setExpirationDate(LocalDate expirationDate) {
+        if (expirationDate == null) throw new IllegalArgumentException("Expiration date cannot be null");
         this.expirationDate = expirationDate;
     }
 
     public void setQuantity(int quantity) {
+        if (quantity < 0) throw new IllegalArgumentException("Quantity cannot be negative");
         this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", unitDeliveryPrice=" + unitDeliveryPrice +
+                ", category='" + category + '\'' +
+                ", expirationDate=" + expirationDate +
+                ", quantity=" + quantity +
+                ", sellingPriceCalculator=" + sellingPriceCalculator +
+                '}';
     }
 }

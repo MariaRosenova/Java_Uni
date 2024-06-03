@@ -45,7 +45,6 @@ public class Cashier implements Serializable {
     public void setRegisterId(int registerId) {
         this.registerId = registerId;
     }
-
     public void processOrder(double priceOfOrder, double customerMoney) throws InsufficientFundsException {
         if (priceOfOrder > customerMoney) {
             double shortfall = priceOfOrder - customerMoney;
