@@ -52,6 +52,7 @@ public class Receipt implements Serializable {
 
         product.setQuantity(product.getQuantity() - quantity);
         products.add(product);
+        calculateTotal();
     }
 
 //    public static int getNextReceiptNumber() {
@@ -74,7 +75,7 @@ public class Receipt implements Serializable {
 
     //LOOK in details
     public void saveToFile() throws IOException {
-        // Serialization code here
+
         String fileName = "receipt_" + receiptNumber + ".txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.write("Receipt #" + receiptNumber + "\n");
