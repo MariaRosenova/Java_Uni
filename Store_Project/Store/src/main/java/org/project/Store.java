@@ -1,31 +1,39 @@
 package org.project;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Store {
     private static int nextReceiptNumber = 1;
-    private List<Cashier> cashiers; //map
+    private Map<Integer, Cashier> cashiers;
     private List<Product> inventory;
-    private List<Receipt> receipts; //map
+    private Map<Integer, Receipt> receipts;
     private double totalRevenue;
     private double totalExpenses;
 
     public Store() {
-        this.cashiers = new ArrayList<>();
+        this.cashiers = new HashMap<>();
         this.inventory = new ArrayList<>();
-        this.receipts = new ArrayList<>();
+        this.receipts = new HashMap<>();
         this.totalRevenue = 0.0;
         this.totalExpenses = 0.0;
     }
-        //add methods for totalRevenue, totalExpenses, profit
 
     public List<Cashier> getCashiers() {
-        return cashiers;
+        return new ArrayList<>(cashiers.values());
     }
 
-    public void setCashiers(List<Cashier> cashiers) {
-        this.cashiers = cashiers;
+    public void addCashier(Cashier cashier) {
+        this.cashiers.put(cashier.getId(), cashier);
+        this.totalExpenses += cashier.getSalary();
+    }
+    public void removeCashier(int cashierId) {
+        Cashier removed = this.cashiers.remove(cashierId);
+        if (removed != null) {
+            this.totalExpenses -= removed.getSalary();
+        }
     }
 
     public List<Product> getInventory() {
@@ -37,31 +45,33 @@ public class Store {
     }
 
     public List<Receipt> getReceipts() {
-        return receipts;
+        return new ArrayList<>(receipts.values());
     }
 
-    public void setReceipts(List<Receipt> receipts) {
-        this.receipts = receipts;
+    public synchronized void addReceipts(Receipt receipt) {
+        this.receipts.put(nextReceiptNumber++, receipt);
+        this.totalRevenue += receipt.getTotalAmount();
     }
 
-    public void addProduct(Product product) {
+    public synchronized void addProduct(Product product) {
         this.inventory.add(product);
-       // this.totalExpenses += product.getDeliveryCost(); //FIX: THE PRODUCT DELIVERY
+        this.totalExpenses += product.getUnitDeliveryPrice();
     }
 
-    public void removeProduct(Product product) {
+    public synchronized void removeProduct(Product product) {
         this.inventory.remove(product);
     }
 
-    public void addCashier(Cashier cashier) {
-        this.cashiers.add(cashier);
-        this.totalExpenses += cashier.getSalary(); // See this method
+    public double getTotalRevenue() {
+        return totalRevenue;
     }
 
-    public void removeCashier(Cashier cashier) {
-        this.cashiers.remove(cashier);
-        this.totalExpenses -= cashier.getSalary();
+    public double getTotalExpenses() {
+        return totalExpenses;
     }
 
+    public double getProfit() {
+        return totalRevenue - totalExpenses;
+    }
 
 }
