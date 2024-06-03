@@ -46,10 +46,10 @@ public class Cashier implements Serializable {
         this.registerId = registerId;
     }
 
-    public void processOrder(double priceOfOrder, double customerMoney) {
+    public void processOrder(double priceOfOrder, double customerMoney) throws InsufficientFundsException {
         if (priceOfOrder > customerMoney) {
             double shortfall = priceOfOrder - customerMoney;
-            System.out.println("The money is not enough, you have to pay $" + shortfall + "more.");
+            throw new InsufficientFundsException("The money is not enough, you have to pay $" + shortfall + "more.");
         } else {
             double remainder = customerMoney - priceOfOrder;
             String message = remainder > 0
@@ -58,5 +58,15 @@ public class Cashier implements Serializable {
             System.out.println(message);
         }
 
+    }
+
+    @Override
+    public String toString() {
+        return "Cashier{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", salary=" + salary +
+                ", registerId=" + registerId +
+                '}';
     }
 }
