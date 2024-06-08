@@ -8,13 +8,14 @@ import java.util.List;
 
 public class Receipt implements Serializable {
     private int receiptNumber = 0;
+    private static int lastReceiptNumber = 0;
     private Cashier cashier;
     private LocalDateTime dateTime;
     private List<Product> products;
     private double totalAmount;
 
-    public Receipt(int receiptNumber, Cashier cashier, List<Product> products, double totalAmount) {
-        this.receiptNumber = receiptNumber;
+    public Receipt(Cashier cashier, List<Product> products, double totalAmount) {
+        this.receiptNumber = generateNextReceiptNumber();
         this.cashier = cashier;
         this.dateTime = LocalDateTime.now();
         this.products = new ArrayList<>();
@@ -55,9 +56,9 @@ public class Receipt implements Serializable {
         calculateTotal();
     }
 
-//    public static int getNextReceiptNumber() {
-//        return ++receiptNumber;
-//    }
+    private static synchronized int generateNextReceiptNumber() {
+        return ++lastReceiptNumber;
+    }
 
     public void calculateTotal() {
         totalAmount = products.stream().mapToDouble(p -> p.calculateSellingPrice(20, 5, 10)).sum(); // Example percentages
