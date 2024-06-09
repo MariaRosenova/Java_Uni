@@ -5,34 +5,38 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-
-        // Създаване на обект Store
         Store store = new Store();
 
-        SellingPriceCalculator foodCalculator = new FoodSellingPriceCalculator();
-        SellingPriceCalculator nonFoodCalculator = new NonFoodSellingPriceCalculator();
-
-        // Създаване на касиери
         Cashier cashier1 = new Cashier(1, "Peter Petrov", 2500.00);
         Cashier cashier2 = new Cashier(2, "Alex Ivanova", 2700.00);
 
-        // Добавяне на касиери в магазина
         store.addCashier(cashier1);
         store.addCashier(cashier2);
 
-        Product product1 = new Product("Apple", 20, Product.Category.FOOD, LocalDate.of(2025, 12, 31),10, foodCalculator);
-        Product product2 = new Product("Cake", 10, Product.Category.FOOD, LocalDate.now().plusDays(5), 10, foodCalculator);
-        Product product3 = new Product("Book", 30.0, Product.Category.NON_FOOD, null, 1, nonFoodCalculator);
+        store.setMarkupPercentageFood(20);
+        store.setMarkupPercentageNonFood(10);
+        store.setDaysBeforeExpirationDiscount(5);  // set 5 days before expiration
+        store.setDiscountPercentage(10); //%
 
-        // Calculate selling prices
-        double foodSellingPrice = foodProduct.calculateSellingPrice(20, 3, 10);
-        double nonFoodSellingPrice = nonFoodProduct.calculateSellingPrice(20, 0, 0);
+        Product product1 = new Product("Apple", 20, Product.Category.FOOD, LocalDate.of(2025, 12, 31), 20);
+        Product product2 = new Product("Cake", 10, Product.Category.FOOD, LocalDate.now().plusDays(5), 10);
+        Product product3 = new Product("Book", 30.0, Product.Category.NON_FOOD, null, 20);
 
+        store.addProduct(product1);
+        store.addProduct(product2);
+        store.addProduct(product3);
 
+        // Create a receipt
+        Receipt receipt = new Receipt(cashier1, store);
+        try {
+            receipt.addProduct(product1, 2);
+            receipt.addProduct(product2, 1);
+            receipt.addProduct(product3, 1);
+        } catch (InsufficientQuantityException | ExpiredProductException e) {
+            System.out.println("Error adding product: " + e.getMessage());
+        }
 
-        // Output results
-        System.out.println("Food selling price: " + foodSellingPrice);
-        System.out.println("Non-food selling price: " + nonFoodSellingPrice);
+        receipt.printReceipt();
 
         // Save the receipt to a file
         try {
@@ -43,7 +47,7 @@ public class Main {
 
         // Read the receipt from a file
         try {
-            Receipt loadedReceipt = Receipt.readFromFile("receipt_1.txt");
+            Receipt loadedReceipt = Receipt.readFromFile("receipt_" + receipt.getReceiptNumber() + ".txt");
             System.out.println("Loaded receipt from file:");
             loadedReceipt.printReceipt();
         } catch (IOException | ClassNotFoundException e) {

@@ -12,20 +12,18 @@ public class Product implements Serializable {
     private Category category;
     private LocalDate expirationDate;
     private int quantity;
-    private SellingPriceCalculator sellingPriceCalculator;
 
     public enum Category {
         FOOD,
         NON_FOOD
     }
-    public Product(String name, double unitDeliveryPrice, Category category, LocalDate expirationDate, int quantity, SellingPriceCalculator sellingPriceCalculator)  {
+
+    public Product(String name, double unitDeliveryPrice, Category category, LocalDate expirationDate, int quantity)  {
 
         if (name == null || name.isEmpty()) throw new IllegalArgumentException("Name cannot be null or empty");
         if (unitDeliveryPrice < 0) throw new IllegalArgumentException("Unit delivery price cannot be negative");
         if (category == null) throw new IllegalArgumentException("Category cannot be null");
         if (quantity < 0) throw new IllegalArgumentException("Quantity cannot be negative");
-        if (sellingPriceCalculator == null) throw new IllegalArgumentException("Selling price calculator cannot be null");
-
 
         this.id = generateId();
         this.name = name;
@@ -33,14 +31,9 @@ public class Product implements Serializable {
         this.category = category;
         this.expirationDate = expirationDate;
         this.quantity = quantity;
-        this.sellingPriceCalculator = sellingPriceCalculator;
     }
 
     private static synchronized int generateId() { return ++idCode; }
-
-    public double calculateSellingPrice(int markupPercentage, int daysBeforeExpiration, int discountPercentage) {
-        return sellingPriceCalculator.calculateSellingPrice(unitDeliveryPrice, markupPercentage, discountPercentage, daysBeforeExpiration, expirationDate);
-    }
 
     public int getId() {
         return id;
@@ -97,10 +90,9 @@ public class Product implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", unitDeliveryPrice=" + unitDeliveryPrice +
-                ", category='" + category + '\'' +
+                ", category=" + category +
                 ", expirationDate=" + expirationDate +
                 ", quantity=" + quantity +
-                ", sellingPriceCalculator=" + sellingPriceCalculator +
                 '}';
     }
 }
