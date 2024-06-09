@@ -45,6 +45,16 @@ public class Receipt implements Serializable {
         return totalAmount;
     }
 
+
+    /**
+     * Adds a product to the receipt.
+     *
+     * @param product  the product to add
+     * @param quantity the quantity of the product
+     * @throws InsufficientQuantityException if the product quantity is insufficient
+     * @throws ExpiredProductException       if the product is expired
+     */
+
     public void addProduct(Product product, int quantity) throws InsufficientQuantityException, ExpiredProductException {
         if (product.getQuantity() < quantity) {
             throw new InsufficientQuantityException(product, quantity, product.getQuantity());
@@ -71,6 +81,9 @@ public class Receipt implements Serializable {
     private static synchronized int generateNextReceiptNumber() {
         return ++lastReceiptNumber;
     }
+    /**
+     * Calculates the total amount for the receipt.
+     */
 
     public void calculateTotal() {
         totalAmount = prices.stream().mapToDouble(Double::doubleValue).sum();
@@ -88,6 +101,12 @@ public class Receipt implements Serializable {
         System.out.println("Total: " + totalAmount);
     }
 
+    /**
+     * Saves the receipt to a file.
+     *
+     * @throws IOException if an I/O error occurs
+     */
+
     public void saveToFile() throws IOException {
         String fileName = "receipt_" + receiptNumber + ".txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
@@ -102,6 +121,15 @@ public class Receipt implements Serializable {
             writer.write("Total: " + totalAmount + "\n");
         }
     }
+
+    /**
+     * Reads a receipt from a file.
+     *
+     * @param fileName the name of the file
+     * @return the read receipt
+     * @throws IOException            if an I/O error occurs
+     * @throws ClassNotFoundException if the class of the serialized object cannot be found
+     */
 
     public static Receipt readFromFile(String fileName) throws IOException, ClassNotFoundException {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {

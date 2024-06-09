@@ -59,16 +59,36 @@ public class Product implements Serializable {
         return quantity;
     }
 
+    /**
+     * Sets the name of the product.
+     *
+     * @param name the new name of the product
+     * @throws IllegalArgumentException if the name is null or empty
+     */
+
     public void setName(String name) {
         if (name == null || name.isEmpty()) throw new IllegalArgumentException("Name cannot be null or empty");
         this.name = name;
     }
+
+    /**
+     * Sets the unit delivery price of the product.
+     *
+     * @param unitDeliveryPrice the new unit delivery price
+     * @throws IllegalArgumentException if the price is negative
+     */
 
     public void setUnitDeliveryPrice(double unitDeliveryPrice) {
         if (unitDeliveryPrice < 0) throw new IllegalArgumentException("Unit delivery price cannot be negative");
         this.unitDeliveryPrice = unitDeliveryPrice;
     }
 
+    /**
+     * Sets the category of the product.
+     *
+     * @param category the new category
+     * @throws IllegalArgumentException if the category is null
+     */
     public void setCategory(Category category) {
         if (category == null) throw new IllegalArgumentException("Category cannot be null");
         this.category = category;
