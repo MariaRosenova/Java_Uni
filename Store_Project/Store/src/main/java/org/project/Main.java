@@ -3,8 +3,20 @@ package org.project;
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * The Main class contains the main method to run the store management system.
+ */
+
 public class Main {
     public static void main(String[] args) throws InsufficientFundsException {
+
+        /**
+         * The main method to run the store management system.
+         *
+         * @param args command line arguments (not used)
+         * @throws InsufficientFundsException if there are insufficient funds to process the order
+         */
+
         Store store = new Store();
 
         Cashier cashier1 = new Cashier(1, "Peter Petrov", 2500.00);
@@ -28,8 +40,6 @@ public class Main {
 
         Customer customer = new Customer("Maria Shishkova", 10000);
 
-
-        // Create a receipt
         Receipt receipt = new Receipt(cashier1, store);
 
         try {
@@ -38,7 +48,7 @@ public class Main {
             receipt.addProduct(product3, 1);
         } catch (InsufficientQuantityException | ExpiredProductException e) {
             System.out.println("Error adding product: " + e.getMessage());
-            return;  // Exit if there is an error adding products
+            return;
         }
 
         receipt.calculateTotal();
@@ -48,14 +58,12 @@ public class Main {
             if (cashier1.processOrder(receipt.getTotalAmount(), customer.getBalance())) {
                 receipt.printReceipt();
 
-                // Save the receipt to a file
                 try {
                     receipt.saveToFile();
                 } catch (IOException e) {
                     System.out.println("Error saving receipt to file: " + e.getMessage());
                 }
 
-                // Read the receipt from a file
                 try {
                     Receipt loadedReceipt = Receipt.readFromFile("receipt_" + receipt.getReceiptNumber() + ".txt", store, cashier1);
                     System.out.println("Loaded receipt from file:");
