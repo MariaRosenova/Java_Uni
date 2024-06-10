@@ -89,6 +89,7 @@ public class Product implements Serializable {
      * @param category the new category
      * @throws IllegalArgumentException if the category is null
      */
+
     public void setCategory(Category category) {
         if (category == null) throw new IllegalArgumentException("Category cannot be null");
         this.category = category;

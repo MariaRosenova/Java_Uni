@@ -81,6 +81,7 @@ public class Receipt implements Serializable {
     private static synchronized int generateNextReceiptNumber() {
         return ++lastReceiptNumber;
     }
+
     /**
      * Calculates the total amount for the receipt.
      */
@@ -135,5 +136,9 @@ public class Receipt implements Serializable {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
             return (Receipt) in.readObject();
         }
+    }
+
+    public Store getStore() {
+        return store;
     }
 }

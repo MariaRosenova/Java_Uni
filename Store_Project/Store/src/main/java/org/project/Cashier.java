@@ -4,16 +4,18 @@ import java.io.Serializable;
 
 public class Cashier implements Serializable {
     private int id;
+    private static int idCode = 0;
     private String name;
     private double salary;
     private int registerId;
 
     public Cashier(int id, String name, double salary) {
         this.name = name;
-        this.id = id;
+        this.id = generateId();
         this.salary = salary;
     }
 
+    private static synchronized int generateId() { return ++idCode; }
     public int getId() {
         return id;
     }

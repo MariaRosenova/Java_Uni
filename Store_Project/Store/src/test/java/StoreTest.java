@@ -1,9 +1,7 @@
-import org.junit.Before;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.project.Product;
-import org.project.Receipt;
-import org.project.Store;
-import org.project.Cashier;
+import org.project.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,75 +11,71 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class StoreTest {
     private Store store;
-    private Product product1;
-    private Product product2;
-    private Cashier cashier1;
-    private Cashier cashier2;
+    private Cashier cashier;
+    private Product foodProduct;
+    private Product nonFoodProduct;
 
-
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         store = new Store();
-        product1 = new Product(1, "Product1", 10.0, "Category1", LocalDate.of(2024, 12, 31), 5);
-        product2 = new Product(2, "Product2", 20.0, "Category2", LocalDate.of(2024, 12, 31), 10);
-        cashier1 = new Cashier(1, "Cashier1", 3000.0);
-        cashier2 = new Cashier(2, "Cashier2", 3500.0);
+        cashier = new Cashier(1, "John Doe", 3000.0);
+        foodProduct = new Product("Milk", 1.5, Product.Category.FOOD, LocalDate.now().plusDays(10), 10);
+        nonFoodProduct = new Product("Shampoo", 5.0, Product.Category.NON_FOOD, null, 20);
     }
 
     @Test
-    public void testAddProduct() {
-        store.addProduct(product1);
-        assertTrue(store.getInventory().contains(product1));
+    void testAddAndRemoveCashier() {
+        store.addCashier(cashier);
+        List<Cashier> cashiers = store.getCashiers();
+        assertEquals(1, cashiers.size());
+        assertEquals(cashier, cashiers.get(0));
+
+        store.removeCashier(cashier.getId());
+        cashiers = store.getCashiers();
+        assertTrue(cashiers.isEmpty());
     }
 
     @Test
-    public void testRemoveProduct() {
-        store.addProduct(product1);
-        store.removeProduct(product1);
-        assertFalse(store.getInventory().contains(product1));
+    void testAddAndRemoveProduct() {
+        store.addProduct(foodProduct);
+        List<Product> inventory = store.getInventory();
+        assertEquals(1, inventory.size());
+        assertEquals(foodProduct, inventory.get(0));
+
+        store.removeProduct(foodProduct);
+        inventory = store.getInventory();
+        assertTrue(inventory.isEmpty());
     }
 
     @Test
-    public void testAddCashier() {
-        store.addCashier(cashier1);
-        assertTrue(store.getCashiers().contains(cashier1));
+    void testCalculatePriceForFood() {
+        double price = store.calculatePriceForFood(foodProduct.getUnitDeliveryPrice(), foodProduct.getExpirationDate());
+        double expectedPrice = 1.5 * (1 + store.getMarkupPercentageFood() / 100.0);
+        assertEquals(expectedPrice, price);
     }
 
     @Test
-    public void testRemoveCashier() {
-        store.addCashier(cashier1);
-        store.removeCashier(cashier1);
-        assertFalse(store.getCashiers().contains(cashier1));
+    void testCalculatePriceForNonFood() {
+        double price = store.calculatePriceForNonFood(nonFoodProduct.getUnitDeliveryPrice());
+        double expectedPrice = 5.0 * (1 + store.getMarkupPercentageNonFood() / 100.0);
+        assertEquals(expectedPrice, price);
     }
 
     @Test
-    public void testSetCashiers() {
-        List<Cashier> cashiers = new ArrayList<>();
-        cashiers.add(cashier1);
-        cashiers.add(cashier2);
-        store.setCashiers(cashiers);
-        assertEquals(cashiers, store.getCashiers());
+    void testAddReceipt() {
+        Receipt receipt = new Receipt(cashier, store);
+        store.addReceipts(receipt);
+        List<Receipt> receipts = store.getReceipts();
+        assertEquals(1, receipts.size());
+        assertEquals(receipt, receipts.get(0));
     }
 
     @Test
-    public void testSetInventory() {
-        List<Product> products = new ArrayList<>();
-        products.add(product1);
-        products.add(product2);
-        store.setInventory(products);
-        assertEquals(products, store.getInventory());
-    }
-
-    @Test
-    public void testSetReceipts() {
-        List<Receipt> receipts = new ArrayList<>();
-        List<Product> products = new ArrayList<>();
-        products.add(product1);
-        products.add(product2);
-
-        receipts.add(new Receipt(1, cashier1, products, 1));
-        receipts.add(new Receipt(2, cashier2, products, 2));
-        store.setReceipts(receipts);
-        assertEquals(receipts, store.getReceipts());
+    void testGetProfit() {
+        store.addProduct(foodProduct);
+        Receipt receipt = new Receipt(cashier, store);
+        store.addReceipts(receipt);
+        double profit = store.getProfit();
+        assertEquals(store.getTotalRevenue() - store.getTotalExpenses(), profit);
     }
 }
