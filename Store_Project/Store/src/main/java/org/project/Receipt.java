@@ -132,9 +132,37 @@ public class Receipt implements Serializable {
      * @throws ClassNotFoundException if the class of the serialized object cannot be found
      */
 
-    public static Receipt readFromFile(String fileName) throws IOException, ClassNotFoundException {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
-            return (Receipt) in.readObject();
+    public static Receipt readFromFile(String fileName, Store store, Cashier cashier) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            Receipt receipt = new Receipt(cashier, store);
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("Receipt #")) {
+                    receipt.receiptNumber = Integer.parseInt(line.split("#")[1].trim());
+                } else if (line.startsWith("Cashier:")) {
+                    // Ignore, as cashier is already passed
+                } else if (line.startsWith("Date:")) {
+                    // Ignore, as dateTime is set to now
+                } else if (line.startsWith("Total:")) {
+                    receipt.totalAmount = Double.parseDouble(line.split(":")[1].trim());
+                } else {
+                    String[] parts = line.split(" - ");
+                    if (parts.length == 2) {
+                        String productName = parts[0].trim();
+                        double price = Double.parseDouble(parts[1].trim());
+                        Product product = store.getInventory().stream()
+                                .filter(p -> p.getName().equals(productName))
+                                .findFirst()
+                                .orElse(null);
+                        if (product != null) {
+                            receipt.products.add(product);
+                            receipt.prices.add(price);
+                        }
+                    }
+                }
+            }
+            receipt.calculateTotal();
+            return receipt;
         }
     }
 
