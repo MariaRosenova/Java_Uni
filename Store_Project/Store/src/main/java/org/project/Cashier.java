@@ -47,16 +47,16 @@ public class Cashier implements Serializable {
     public void setRegisterId(int registerId) {
         this.registerId = registerId;
     }
-    public void processOrder(double priceOfOrder, double customerMoney) throws InsufficientFundsException {
+    public boolean processOrder(double priceOfOrder, double customerMoney) throws InsufficientFundsException {
         if (priceOfOrder > customerMoney) {
             double shortfall = priceOfOrder - customerMoney;
             throw new InsufficientFundsException("The money is not enough, you have to pay $" + shortfall + "more.");
+
         } else {
             double remainder = customerMoney - priceOfOrder;
-            String message = remainder > 0
-                    ? "The order is successful! You have $" + remainder + " in change."
-                    : "The order is successful!";
-            System.out.println(message);
+            if (remainder > 0) {
+                System.out.println("The order is successful! You have $" + remainder + " in change.");}
+            return true;
         }
 
     }
