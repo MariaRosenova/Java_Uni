@@ -30,7 +30,7 @@ public class Main {
         store.setDaysBeforeExpirationDiscount(5);  // set 5 days before expiration
         store.setDiscountPercentage(10); //%
 
-        Product product1 = new Product("Apple", 20, Product.Category.FOOD, LocalDate.of(2025, 12, 31), 20);
+        Product product1 = new Product("Apple", 20, Product.Category.FOOD, LocalDate.of(2020, 12, 31), 20);
         Product product2 = new Product("Cake", 10, Product.Category.FOOD, LocalDate.now().plusDays(5), 10);
         Product product3 = new Product("Book", 30.0, Product.Category.NON_FOOD, null, 20);
 
@@ -66,7 +66,7 @@ public class Main {
 
                 try {
                     Receipt loadedReceipt = Receipt.readFromFile("receipt_" + receipt.getReceiptNumber() + ".txt", store, cashier1);
-                    System.out.println("Loaded receipt from file:");
+                    System.out.println("--------------Loaded receipt from file:--------------");
                     loadedReceipt.printReceipt();
                 } catch (IOException e) {
                     System.out.println("Error reading receipt from file: " + e.getMessage());

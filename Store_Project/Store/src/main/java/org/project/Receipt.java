@@ -25,6 +25,7 @@ public class Receipt implements Serializable {
         this.store = store;
     }
 
+
     public int getReceiptNumber() {
         return receiptNumber;
     }

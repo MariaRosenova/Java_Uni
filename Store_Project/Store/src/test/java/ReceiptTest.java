@@ -1,5 +1,4 @@
 
-import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -97,7 +96,7 @@ public class ReceiptTest {
         receipt.addProduct(product, 2);
         receipt.saveToFile();
 
-        Receipt readReceipt = Receipt.readFromFile(fileName);
+        Receipt readReceipt = Receipt.readFromFile(fileName, store, cashier);
         assertEquals(receipt.getReceiptNumber(), readReceipt.getReceiptNumber());
         assertEquals(receipt.getCashier().getName(), readReceipt.getCashier().getName());
         assertEquals(receipt.getDateTime(), readReceipt.getDateTime());
